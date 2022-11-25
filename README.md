@@ -21,12 +21,12 @@
 This repo provides a simple example Application Package in accordance with the [OGC Best Practice for Application Packages](https://docs.ogc.org/bp/20-089r1.html).
 
 The `convert` application package comprises these parts:
-* Application Implementation<br>
+* **Application Implementation**<br>
   A `bash` script (`convert.sh`) that implements the application functionality
-* Application Container Image<br>
+* **Application Container Image**<br>
   A docker container image that packages the convert script
-* Application CWL<br>
-  A CWL file that describes the application so that it can be deployed and executed in an OGC API Processes service
+* **Application CWL**<br>
+  A CWL file that describes the application so that it can be deployed and executed in an **_OGC API Processes_** service
 
 ## Application Implementation - `convert.sh`
 
@@ -51,11 +51,11 @@ where,
 
 ### Outputs
 
-The 'current working directory' of the application execution is the directory into which all outputs must be placed by the application. This location is established by the CWL runner, and is consistent with the approach defined by the OGC Best Practice.
+The 'current working directory' of the application execution is the directory into which all outputs must be placed by the application. This location is established by the CWL runner, and is consistent with the approach defined by the [OGC Best Practice for Application Packages](https://docs.ogc.org/bp/20-089r1.html).
 
 The convert.sh script names the resized output file by reusing the name of the input file with the postfix `-resize`.
 
-The outputs must be presented as a STAC catalog. Thus, the application must accompany the output image with STAC catalog and item files that reference the image asset.
+The outputs must be presented as a _STAC Catalog_. Thus, the application must accompany the output image with _STAC Catalog_ and _STAC Item_ files that reference the image asset.
 
 ### `resize --url` implementation
 
@@ -69,8 +69,9 @@ convert https://eoepca.org/media_portal/images/logo6_med.original.png 50%
 
 In this case the argument supplied as `--stac <stac-catalog>` is an input directory within which it is expected to find a static STAC catalogue. The file `<stac-catalog>/catalog.json` is expected to exist, from where the input asset can be discovered. For simplicity, the first asset in the first STAC item is taken.
 
-Once the input image has been identified then the convert utility is invoked similarly as for the --url case. For example...
+Once the input image has been identified then the convert utility is invoked similarly as for the `--url` case.
 
+For example...
 ```
 convert <stac-catalog>/eoepca-logo.png 50%
 ```
@@ -90,21 +91,21 @@ ENV PATH="/app:${PATH}"
 
 ## Application CWL
 
-In accordance with the OGC Best Practice, the application is described by a CWL file.
+In accordance with the [OGC Best Practice for Application Packages](https://docs.ogc.org/bp/20-089r1.html), the application is described by a CWL file.
 
 The CWL application description comprises two parts:
-* CommandLineTool<br>
+* **`CommandLineTool`**<br>
   Describes the tool to be executed - `convert.sh` is this case
-* Workflow<br>
-  Provides the entry-point to the application package, in accordance with the OGC Best Practice
+* **`Workflow`**<br>
+  Provides the entry-point to the application package, in accordance with the [OGC Best Practice for Application Packages](https://docs.ogc.org/bp/20-089r1.html)
 
-Two variants of the Application Package are provided to reflect use of either `--url` or `--stac` - ref. [`convert-url-app.cwl`](convert-url-app.cwl) and [`convert-stac-app.cwl`](convert-stac-app.cwl).
+Two variants of the _Application Package_ are provided to reflect use of either `--url` or `--stac` - see files [`convert-url-app.cwl`](convert-url-app.cwl) and [`convert-stac-app.cwl`](convert-stac-app.cwl).
 
 > It would be possible to express these exclusive inputs in a single application package (ref. [records and type unions](https://www.commonwl.org/user_guide/topics/inputs.html#inclusive-and-exclusive-inputs)) - but for simplicity separate application packages are used.
 
 ### `CommandLineTool`
 
-Describes the convert.sh script in terms of its inputs as command-line arguments, and outputs.
+Describes the `convert.sh` script in terms of its inputs as command-line arguments, and outputs.
 
 Example for `--url`...
 
@@ -138,13 +139,13 @@ Example for `--url`...
 
 The `baseCommand` is required to identify the 'executable' to invoke - assumed to be on the `PATH` within the container environment.
 
-The `inputs` reflect the stated command-line options for `<function>`, `<url>` (with prefix) and `<size>` - all of type `string`.
+The `inputs` reflect the stated command-line options for `<function>`, `<url>` and `<size>` - all of type `string`. The `<url>` is specified to require the `--url` prefix.
 
-The `outputs` are all files in the output directory.
+The `outputs` are described as being all files that are presented in the output directory.
 
 The application container image for execution is identified as `eoepca/convert:latest`.
 
-The `CommandLineTool` for `--stac` varies only by replacing the `url` input with the `stac` input, which is of type `Directory`...
+The `CommandLineTool` for `--stac` varies only by replacing the `url` input with the `stac` input, which is of type `Directory`, and with the command-line prefix `--stac`...
 
 ```
       stac:
@@ -199,11 +200,11 @@ As before, the `Workflow` for `--stac` varies only by replacing the `url` input 
         type: Directory
 ```
 
-Signficantly, this input of type `Directory`, which triggers the ADES to perform a `stage-in` of the inputs from the identified source.
+Signficantly, this input is of type `Directory`, which triggers the ADES to perform a `stage-in` of the inputs from the identified source.
 
 During stage-in the ADES interprets the source, retrieves the identified assets and presents them as a STAC catalog in an input directory for the executing application.
 
-The ADES understands a variety of sources, such as OpenSearch URLs, which it is able to use as a source of assets and 'transform' to a local STAC catalog for application input.
+The deafult ADES deployment uses the [`stars` **_Spatio Temporal Asset Router Services_** tool](https://github.com/Terradue/Stars) to perform the stage-in. `stars` understands a variety of sources, such as atom feed from an OpenSearch URL, which it is able to use as a source of assets, from where they are retrieved, enumerated and described as a local static STAC calaog for application input.
 
 In the simplest case, the source can be provided as an existing STAC catalog, or even a single STAC item.
 
@@ -220,6 +221,8 @@ cwltool --outdir out convert-url-app.cwl#convert \
   --size "50%"
 ```
 
+The script [`run-locally-url.sh`](run-locally-url.sh) is provided as a helper to perform the above CWL workflow execution.<br>_For convenience, the script emdeds a python virtual environent that includes the `cwltool`._
+
 ### local: `resize --stac`
 
 ```
@@ -232,6 +235,8 @@ cwltool --outdir out convert-stac-app.cwl#convert \
 > NOTE<br>
 > Since the application package is executed outside the context of the ADES stage-in functionality, the `--stac` must be provided as 'pre-staged-in' STAC catalog directory.<br>
 > For this purpose, a simple STAC catalogue has been created in the [`stac/`](stac/) directory of this repository.
+
+The script [`run-locally-stac.sh`](run-locally-stac.sh) is provided as a helper to perform the above CWL workflow execution.<br>_For convenience, the script emdeds a python virtual environent that includes the `cwltool`._
 
 ## ADES Execution
 
@@ -285,7 +290,7 @@ curl --request POST \
   --data '{"inputs": {"fn": "resize","stac":  "https://raw.githubusercontent.com/EOEPCA/convert/main/stac/catalog.json","size": "50%"},"response":"raw"}'
 ```
 
-> NOTE input STAC item [`catalog.json`](stac/catalog.json)
+> NOTE input **STAC Catalog** [`catalog.json`](stac/catalog.json)
 
 **Input as STAC item...**
 
@@ -298,4 +303,4 @@ curl --request POST \
   --data '{"inputs": {"fn": "resize","stac":  "https://raw.githubusercontent.com/EOEPCA/convert/main/stac/eoepca-logo.json","size": "50%"},"response":"raw"}'
 ```
 
-> NOTE input STAC item [`eoepca-logo.json`](stac/eoepca-logo.json)
+> NOTE input **STAC Item** [`eoepca-logo.json`](stac/eoepca-logo.json)
