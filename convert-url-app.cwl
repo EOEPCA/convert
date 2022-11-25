@@ -3,7 +3,7 @@ $namespaces:
   s: https://schema.org/
 schemas:
   - http://schema.org/version/9.0/schemaorg-current-http.rdf
-s:softwareVersion: 0.1.1
+s:softwareVersion: 0.1.2
 
 $graph:
   # Workflow entrypoint
