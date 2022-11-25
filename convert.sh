@@ -147,7 +147,7 @@ createStacItem() {
   },
   "bbox": [-180, -90, 180, 90],
   "assets": {
-    "output": {
+    "${filestem}": {
       "type": "${mimetype}",
       "roles": ["data"],
       "href": "${filename}",
