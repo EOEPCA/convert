@@ -13,10 +13,16 @@ $graph:
     label: convert stac app
     inputs:
       fn:
+        label: the operation to perform
+        doc: the operation to perform
         type: string
       stac:
+        label: the image to convert as a STAC item
+        doc: the image to convert as a STAC item
         type: Directory
       size:
+        label: the percentage for a resize operation
+        doc: the percentage for a resize operation
         type: string
     outputs:
       - id: wf_outputs
@@ -59,3 +65,6 @@ $graph:
     requirements:
       DockerRequirement:
         dockerPull: eoepca/convert:latest
+      ResourceRequirement:
+        coresMax: 1
+        ramMax: 512

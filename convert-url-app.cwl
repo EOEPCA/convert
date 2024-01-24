@@ -13,10 +13,16 @@ $graph:
     label: convert url app
     inputs:
       fn:
+        label: the operation to perform
+        doc: the operation to perform
         type: string
       url:
+        label: the image to convert
+        doc: the image to convert
         type: string
       size:
+        label: the percentage for a resize operation
+        doc: the percentage for a resize operation
         type: string
     outputs:
       - id: wf_outputs
