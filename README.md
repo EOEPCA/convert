@@ -174,7 +174,7 @@ Example for `--url`...
       size:
         type: string
     outputs:
-      - id: wf_outputs
+      - id: stac
         type: Directory
         outputSource:
           - convert/results
