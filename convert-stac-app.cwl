@@ -7,9 +7,13 @@ schemas:
 $graph:
   # Workflow entrypoint
   - class: Workflow
-    doc: Convert Stac
     id: convert-stac
     label: convert stac app
+    doc: Convert Stac
+    requirements:
+      ResourceRequirement:
+        coresMax: 1
+        ramMax: 1024
     inputs:
       fn:
         label: the operation to perform

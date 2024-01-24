@@ -7,9 +7,13 @@ schemas:
 $graph:
   # Workflow entrypoint
   - class: Workflow
-    doc: Convert URL
     id: convert-url
     label: convert url app
+    doc: Convert URL
+    requirements:
+      ResourceRequirement:
+        coresMax: 1
+        ramMax: 1024
     inputs:
       fn:
         label: the operation to perform
