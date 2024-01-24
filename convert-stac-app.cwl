@@ -1,10 +1,9 @@
 cwlVersion: v1.0
 $namespaces:
   s: https://schema.org/
+s:softwareVersion: 0.1.2
 schemas:
   - http://schema.org/version/9.0/schemaorg-current-http.rdf
-s:softwareVersion: 0.1.2
-
 $graph:
   # Workflow entrypoint
   - class: Workflow
@@ -38,10 +37,16 @@ $graph:
           size: size
         out:
           - results
-
   # convert.sh - takes input args `--stac`
   - class: CommandLineTool
     id: convert
+    requirements:
+      ResourceRequirement:
+        coresMax: 1
+        ramMax: 512
+    hints:
+      DockerRequirement:
+        dockerPull: eoepca/convert:latest
     baseCommand: convert.sh
     inputs:
       fn:
@@ -62,9 +67,3 @@ $graph:
         type: Directory
         outputBinding:
           glob: .
-    requirements:
-      DockerRequirement:
-        dockerPull: eoepca/convert:latest
-      ResourceRequirement:
-        coresMax: 1
-        ramMax: 512
