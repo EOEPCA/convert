@@ -13,7 +13,7 @@ $graph:
     requirements:
       ResourceRequirement:
         coresMax: 1
-        ramMax: 1024
+        ramMax: 512
     inputs:
       fn:
         label: the operation to perform
@@ -47,7 +47,7 @@ $graph:
     requirements:
       ResourceRequirement:
         coresMax: 1
-        ramMax: 1024
+        ramMax: 512
     hints:
       DockerRequirement:
         dockerPull: eoepca/convert:latest
