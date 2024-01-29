@@ -47,7 +47,7 @@ $graph:
     requirements:
       ResourceRequirement:
         coresMax: 1
-        ramMax: 512
+        ramMax: 1024
     hints:
       DockerRequirement:
         dockerPull: eoepca/convert:latest
