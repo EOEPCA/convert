@@ -94,6 +94,11 @@ resizeUrl() {
 
   # outputs as a stac catalogue
   createOutputStac "${outputFile}"
+
+  # DEBUG - sleep before exiting
+  echo "SLEEP: START"
+  sleep 60
+  echo "SLEEP: DONE"
 }
 
 # create stac catalogue to represent the output file
