@@ -13,7 +13,7 @@ $graph:
     requirements:
       ResourceRequirement:
         coresMax: 1
-        ramMax: 512
+        ramMax: 1024
     inputs:
       fn:
         label: the operation to perform
