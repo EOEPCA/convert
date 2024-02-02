@@ -207,3 +207,7 @@ EOF
 
 # call the main entrypoint
 main "$@"
+
+# DEBUG - always exit with success
+echo "Execution status code: $?"
+exit 0
