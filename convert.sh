@@ -6,8 +6,19 @@ cd "$(dirname "$0")"
 BIN_DIR="$(pwd)"
 cd "${ORIG_DIR}"
 
+let status=0
+
 onExit() {
   cd "${ORIG_DIR}"
+
+  # DEBUG - sleep before exiting
+  echo "SLEEP: START"
+  sleep 60
+  echo "SLEEP: DONE"
+
+  # DEBUG - always exit with success
+  echo "Execution status code: $status"
+  exit 0
 }
 trap onExit EXIT
 
@@ -94,11 +105,6 @@ resizeUrl() {
 
   # outputs as a stac catalogue
   createOutputStac "${outputFile}"
-
-  # DEBUG - sleep before exiting
-  echo "SLEEP: START"
-  sleep 60
-  echo "SLEEP: DONE"
 }
 
 # create stac catalogue to represent the output file
@@ -207,7 +213,4 @@ EOF
 
 # call the main entrypoint
 main "$@"
-
-# DEBUG - always exit with success
-echo "Execution status code: $?"
-exit 0
+let status=$?
