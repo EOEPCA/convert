@@ -11,14 +11,15 @@ let status=0
 onExit() {
   cd "${ORIG_DIR}"
 
-  # DEBUG - sleep before exiting
-  echo "SLEEP: START"
-  sleep 60
-  echo "SLEEP: DONE"
+  # # DEBUG - sleep before exiting
+  # echo "SLEEP: START"
+  # sleep 60
+  # echo "SLEEP: DONE"
 
-  # DEBUG - always exit with success
   echo "Execution status code: $status"
-  exit 0
+  # DEBUG - always exit with success
+  # exit 0
+  exit $status
 }
 trap onExit EXIT
 
