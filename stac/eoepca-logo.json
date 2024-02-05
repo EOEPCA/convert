@@ -35,7 +35,7 @@
   }, {
     "type": "application/geo+json",
     "rel": "self",
-    "href": "https://raw.githubusercontent.com/EOEPCA/convert/main/stac/eoepca-logo.png"
+    "href": "https://raw.githubusercontent.com/EOEPCA/convert/main/stac/eoepca-logo.json"
   }, {
     "type": "application/json",
     "rel": "root",
