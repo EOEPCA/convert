@@ -4,7 +4,7 @@
   "id": "convert app inputs",
   "title": "Inputs for the convert application",
   "description": "Data inputs for execution of the convert OGC Application Package",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "extent": {
     "spatial": {
       "bbox": "[-180, -90, 180, 90]"
