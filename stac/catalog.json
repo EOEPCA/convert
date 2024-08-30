@@ -10,6 +10,6 @@
     "rel": "self",
     "href": "https://raw.githubusercontent.com/EOEPCA/convert/main/stac/catalog.json"
   }],
-  "type": "Catalog",
+  "type": "Collection",
   "description": "Root catalog"
 }
