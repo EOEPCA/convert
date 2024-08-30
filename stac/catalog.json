@@ -1,6 +1,18 @@
 {
-  "id": "catalog",
+  "type": "Collection",
   "stac_version": "1.0.0",
+  "id": "convert app inputs",
+  "title": "Inputs for the convert application",
+  "description": "Data inputs for execution of the convert OGC Application Package",
+  "license": "Apache 2.0",
+  "extent": {
+    "spatial": {
+      "bbox": "[-180, -90, 180, 90]"
+    },
+    "temporal": {
+      "interval": null
+    }
+  },
   "links": [{
     "type": "application/geo+json",
     "rel": "item",
@@ -10,6 +22,5 @@
     "rel": "self",
     "href": "https://raw.githubusercontent.com/EOEPCA/convert/main/stac/catalog.json"
   }],
-  "type": "Collection",
-  "description": "Root catalog"
+  "item_assets": []
 }
