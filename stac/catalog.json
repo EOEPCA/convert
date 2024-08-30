@@ -1,7 +1,7 @@
 {
   "type": "Collection",
   "stac_version": "1.0.0",
-  "id": "convert app inputs",
+  "id": "eoepca-convert-app-sample-inputs",
   "title": "Inputs for the convert application",
   "description": "Data inputs for execution of the convert OGC Application Package",
   "license": "Apache-2.0",
