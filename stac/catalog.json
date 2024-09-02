@@ -20,7 +20,7 @@
   }, {
     "type": "application/json",
     "rel": "self",
-    "href": "https://raw.githubusercontent.com/EOEPCA/convert/main/stac/catalog.json"
+    "href": "catalog.json"
   }],
   "item_assets": []
 }
